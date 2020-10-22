@@ -15,7 +15,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $events = Event::paginate(5);
+        $events = Event::paginate(15);
         return view('events/index', compact('events'));
     }
 
@@ -27,7 +27,7 @@ class EventsController extends Controller
     public function create()
     {
         $event= new Event;
-        
+
         return view('events.create', compact('event'));
     }
 
@@ -40,6 +40,9 @@ class EventsController extends Controller
     public function store(EventFormRequest $request)
     {
         Event::updateOrCreate(['title' => $request->title, 'description' => $request->description]);
+
+        session()->flash('notification.message', 'Evenement créé avec succes!');
+        session()->flash('notification.type', 'success');
 
         return redirect(route('home'));
     }
@@ -77,6 +80,8 @@ class EventsController extends Controller
     {
         $event->update(['title' => $request->title, 'description' => $request->description]);
 
+        session()->flash('notification.message', 'Evenement  #' . $event->id . ' modifié avec succes!');
+        session()->flash('notification.type', 'success');
         return redirect()->route('events.show', $event);
     }
 
@@ -89,7 +94,10 @@ class EventsController extends Controller
     public function destroy( Event $event)
     {
         $event->delete();
-        
+
+        session()->flash('notification.message', sprintf('Evenement  #%s supprimé avec succes!',  $event->id ));
+        session()->flash('notification.type', 'danger');
+
         return redirect()->route('home');
     }
 }
