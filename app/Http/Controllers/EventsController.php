@@ -41,8 +41,7 @@ class EventsController extends Controller
     {
         Event::updateOrCreate(['title' => $request->title, 'description' => $request->description]);
 
-        session()->flash('notification.message', 'Evenement créé avec succes!');
-        session()->flash('notification.type', 'success');
+        flash('Evenement cree avec succes!!');
 
         return redirect(route('home'));
     }
@@ -80,8 +79,8 @@ class EventsController extends Controller
     {
         $event->update(['title' => $request->title, 'description' => $request->description]);
 
-        session()->flash('notification.message', 'Evenement  #' . $event->id . ' modifié avec succes!');
-        session()->flash('notification.type', 'success');
+        flash('Evenement modifié avec succes!!');
+
         return redirect()->route('events.show', $event);
     }
 
@@ -95,8 +94,7 @@ class EventsController extends Controller
     {
         $event->delete();
 
-        session()->flash('notification.message', sprintf('Evenement  #%s supprimé avec succes!',  $event->id ));
-        session()->flash('notification.type', 'danger');
+        flash(sprintf('Evenement  #%s supprimé avec succes!',  $event->id ), 'danger');
 
         return redirect()->route('home');
     }
