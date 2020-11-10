@@ -41,7 +41,7 @@ class EventsController extends Controller
     {
         Event::updateOrCreate(['title' => $request->title, 'description' => $request->description]);
 
-        flash('Evenement cree avec succes!!');
+        flash('Evenement créé avec succes!');
 
         return redirect(route('home'));
     }
@@ -79,7 +79,7 @@ class EventsController extends Controller
     {
         $event->update(['title' => $request->title, 'description' => $request->description]);
 
-        flash('Evenement modifié avec succes!!');
+        flash(sprintf('Evenement %s modifié avec succes!', $event->id), 'warning');
 
         return redirect()->route('events.show', $event);
     }
@@ -94,7 +94,7 @@ class EventsController extends Controller
     {
         $event->delete();
 
-        flash(sprintf('Evenement  #%s supprimé avec succes!',  $event->id ), 'danger');
+        flash(sprintf('Evenement %s supprimé avec succes!', $event->id), 'danger');
 
         return redirect()->route('home');
     }

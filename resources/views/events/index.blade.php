@@ -11,10 +11,10 @@
         <div>
             <ul>
                 @foreach ($events as $event)
-                <div class="border w-25">
-                    <li><a href="{{ route('events.show',$event->id) }}">{{ $event->title }}</a></li>
-                </div>
-                -----------------------------------------
+                    <div class="border w-25">
+                        <li><a href="{{ route('events.show',$event->id) }}">{{ $event->title }}</a></li>
+                    </div>
+                    -----------------------------------------
                 @endforeach
             </ul>
         </div>
